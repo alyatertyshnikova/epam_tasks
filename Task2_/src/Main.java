@@ -1,23 +1,22 @@
+import java.util.Scanner;
+
 public class Main {
-        public static void main(String[] args) {
-            int n=10;
-            double min=n, epsilon=1.2;
-            double[] A = new double[n];
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        double epsilon=1.0, a;
 
-            for (int i = 0; i < n; i++) {
-                A[i] = 1 / Math.pow((i + 1), 2);
-                if (A[i] < min && A[i] < epsilon)
-                    min=A[i];
-            }
+        System.out.print("Enter the epsilon:");
+        epsilon=input.nextDouble();
+if (epsilon>0) {
+        int i = 1;
 
-            System.out.print("a: ");
-            for (int i = 0; i < n; i++) {
-                System.out.printf("%.4f" + " ", A[i]);
-            }
-            if (min == n)
-                System.out.printf("\nNot found");
-            else
-                System.out.printf("\nmin: %.4f", min);
+        do {
+            a = 1 / Math.pow(i + 1, 2);
+            System.out.format("a[%d]=%.4f\n", i, a);
+            i++;
         }
-
+        while (a > epsilon);
+        System.out.print("Minimal index: " + (i-1) + "\n");
+        }
+    }
 }

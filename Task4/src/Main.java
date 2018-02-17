@@ -1,12 +1,22 @@
+import java.util.Scanner;
 public class Main {
-    public static void main(String[] args)
-    {
-        double A[]={1.5, 3, 2.4, 1.0001};
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter size of matrix: ");
+        int size=input.nextInt();
+
+        double a[]=new double[size];
+        System.out.print("\nEnter elements of matrix: ");
+        for(int i=0; i<a.length; i++) {
+            a[i]=input.nextDouble();
+        }
+
         double max=Double.MIN_VALUE;
-        for(int i=0; i<A.length; i++)
-        {
-            if(max < (A[i]+A[A.length-1-i]))
-                max=A[i]+A[A.length-1-i];
+        for(int i=0; i<Math.ceil((double)a.length/2); i++) {
+            if(max < (a[i]+a[a.length-1-i])) {
+                max = a[i] + a[a.length - 1 - i];
+            }
         }
         System.out.printf("Max: %f", max);
     }

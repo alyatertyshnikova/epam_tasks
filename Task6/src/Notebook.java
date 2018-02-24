@@ -1,71 +1,65 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Выполнять операции с записями блокнота.
  */
 public class Notebook {
-    Scanner input = new Scanner(System.in);
-    int size;
-    NotebookEntry[] notebookEntries=new NotebookEntry[size];
+    ArrayList<NotebookEntry> notebookEntries = new ArrayList<NotebookEntry>();
+    int size = notebookEntries.size();
 
-    /** Добавить запись к записям блокнота.
+    /**
+     * Добавить запись к записям блокнота.
      *
      * @param text Содержимое записи
      * @param line Номер записи в блокноте
      */
-    public void addEntry(Notebook this, String text, int line){
+    public void addEntry(Notebook this, String text, int line) {
 
-    NotebookEntry[] newNotebookEntries;
-
-    if (line>size+1||line<1) {
-        System.out.print("This line can't exist");
+        if (line > size + 1 || line < 1) {
+            System.out.print("This line can't exist");
+        } else {
+            NotebookEntry newNotebookEntry = new NotebookEntry(text);
+            notebookEntries.add(line - 1, newNotebookEntry);
+            size++;
+        }
     }
-    else{
-        size++;
-        newNotebookEntries=new NotebookEntry[size];
-        System.arraycopy(this.notebookEntries, 0, newNotebookEntries, 0, line-1 );
-        newNotebookEntries[line-1] = new NotebookEntry(text);
-        System.arraycopy(this.notebookEntries, line-1, newNotebookEntries, line, size-line);
-        this.notebookEntries=newNotebookEntries;
-    }
-}
 
     /**
      * Удалить запись из блокнота
+     *
      * @param line Номер записи в блокноте
      */
-    public void deleteEntry(Notebook this, int line){
-    NotebookEntry[] newNotebookEntries;
+    public void deleteEntry(Notebook this, int line) {
+        NotebookEntry[] newNotebookEntries;
 
-    if (line>size+1||line<1) {
-        System.out.print("This line doesn't exist");
+        if (line > size + 1 || line < 1) {
+            System.out.print("This line doesn't exist");
+        } else {
+            notebookEntries.remove(line - 1);
+            size--;
+        }
     }
-    else{
-        newNotebookEntries= new NotebookEntry[size-1];
-        System.arraycopy(this.notebookEntries, 0, newNotebookEntries, 0, line-1 );
-        System.arraycopy(this.notebookEntries, line, newNotebookEntries, line-1, size-line);
-        this.notebookEntries=newNotebookEntries;
-        size--;
-    }
-}
 
     /**
-     *  Изменить запись в блокноте
-     * @param line Номер записи
+     * Изменить запись в блокноте
+     *
+     * @param line    Номер записи
      * @param newtext Текст, измененной записи
      */
-    public void changeEntry(Notebook this, int line, String newtext){
-    this.deleteEntry(line);
-    this.addEntry(newtext, line);
-}
+    public void changeEntry(Notebook this, int line, String newtext) {
+        if (line > size + 1 || line < 1) {
+            System.out.print("This line doesn't exist");
+        } else {
+            this.notebookEntries.get(line - 1).setEntry(newtext);
+        }
+    }
 
     /**
      * Вывести все записи блокнота
      */
-    public void showAllEntries(Notebook this){
-    for(int i=0; i<size; i++)
-    {
-      System.out.format("%d: %s\n", i+1, this.notebookEntries[i].Entry);
+    public void showAllEntries(Notebook this) {
+        for (int i = 0; i < size; i++) {
+            System.out.format("%d: %s\n", i + 1, this.notebookEntries.get(i).getEntry());
+        }
     }
-}
 }

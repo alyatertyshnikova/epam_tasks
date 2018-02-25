@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Выполнять операции с записями блокнота.
  */
 public class Notebook {
-    ArrayList<NotebookEntry> notebookEntries = new ArrayList<NotebookEntry>();
-    int size = notebookEntries.size();
+    NotebookEntry[] notebookEntries = new NotebookEntry[2];
+    int size = 0;
 
     /**
      * Добавить запись к записям блокнота.
@@ -13,13 +14,16 @@ public class Notebook {
      * @param text Содержимое записи
      * @param line Номер записи в блокноте
      */
-    public void addEntry(Notebook this, String text, int line) {
+    public void addEntry(String text, int line) {
 
         if (line > size + 1 || line < 1) {
             System.out.print("This line can't exist");
         } else {
-            NotebookEntry newNotebookEntry = new NotebookEntry(text);
-            notebookEntries.add(line - 1, newNotebookEntry);
+            if (size == notebookEntries.length) {
+                notebookEntries = Arrays.copyOf(notebookEntries, 2 * notebookEntries.length);
+            }
+            System.arraycopy(notebookEntries, line - 1, notebookEntries, line, size - line+1);
+            notebookEntries[line-1]=new NotebookEntry(text);
             size++;
         }
     }
@@ -29,14 +33,16 @@ public class Notebook {
      *
      * @param line Номер записи в блокноте
      */
-    public void deleteEntry(Notebook this, int line) {
+    public void deleteEntry(int line) {
         NotebookEntry[] newNotebookEntries;
 
         if (line > size + 1 || line < 1) {
             System.out.print("This line doesn't exist");
         } else {
-            notebookEntries.remove(line - 1);
+            System.arraycopy(notebookEntries, line, notebookEntries, line - 1, size - line);
             size--;
+            if (size == notebookEntries.length / 2)
+                notebookEntries=Arrays.copyOf(notebookEntries, notebookEntries.length/2);
         }
     }
 
@@ -46,20 +52,20 @@ public class Notebook {
      * @param line    Номер записи
      * @param newtext Текст, измененной записи
      */
-    public void changeEntry(Notebook this, int line, String newtext) {
+    public void changeEntry(int line, String newtext) {
         if (line > size + 1 || line < 1) {
             System.out.print("This line doesn't exist");
         } else {
-            this.notebookEntries.get(line - 1).setEntry(newtext);
+            notebookEntries[line-1].setEntry(newtext);
         }
     }
 
     /**
      * Вывести все записи блокнота
      */
-    public void showAllEntries(Notebook this) {
+    public void showAllEntries() {
         for (int i = 0; i < size; i++) {
-            System.out.format("%d: %s\n", i + 1, this.notebookEntries.get(i).getEntry());
+            System.out.format("%d: %s\n", i + 1, notebookEntries[i].getEntry());
         }
     }
 }

@@ -7,9 +7,16 @@ public class Main {
         n.showAllEntries();
         n.addEntry("What's up?", 3);
         n.showAllEntries();
+        n.addEntry("aa", 2);
+        n.showAllEntries();
         n.deleteEntry(1);
         n.showAllEntries();
         n.changeEntry(1, "Hey you");
         n.showAllEntries();
+
+        Notebook m=new Notebook();
+        m.addEntry("Wow!", 1);
+        m.showAllEntries();
+
     }
 }

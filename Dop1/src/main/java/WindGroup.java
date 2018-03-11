@@ -1,6 +1,8 @@
 package main.java;
 
-public class WindGroup extends MusicalInstruments{
+//Данный класс кроме метода имеет поля и методы,
+//унаследованные от родительского класса MusicalInstrument
+public class WindGroup extends MusicalInstrument {
 
     public WindGroup(String solo, int lengthOfSolo){
         super(solo, lengthOfSolo);

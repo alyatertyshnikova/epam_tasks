@@ -3,12 +3,28 @@ package main.java;
 public class Pen {
     private String color;
     private String brand;
-    public boolean canItWrite;
+    private boolean canItWrite;
 
     public Pen(String color, String brand) {
         this.color = color;
         this.brand = brand;
         canItWrite = true;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public boolean isCanItWrite() {
+        return canItWrite;
+    }
+
+    public void setCanItWrite(boolean canItWrite) {
+        this.canItWrite = canItWrite;
     }
 
     @Override
@@ -33,10 +49,12 @@ public class Pen {
         if (canItWrite != otherPen.canItWrite) {
             return false;
         }
-        if (!equals(color.toCharArray(), otherPen.color.toCharArray())){
+
+        if(color==null || otherPen.color==null || brand==null || otherPen.brand==null) {
             return false;
         }
-        if(!equals(brand.toCharArray(), otherPen.brand.toCharArray())){
+
+        if(!color.equals(otherPen.getColor())|| !brand.equals(otherPen.getBrand())){
             return false;
         }
         return true;
@@ -44,26 +62,9 @@ public class Pen {
 
     @Override
     public int hashCode(){
-        return (((canItWrite)?1:0)+hashCode(color.toCharArray())+hashCode(brand.toCharArray()))%50;
-    }
-
-    private int hashCode(char[] string){
-        int hash=0;
-        for (int i=0; i<string.length; i++){
-            hash+=string[i];
+        if(color!=null && brand!=null) {
+            return (((canItWrite) ? 1 : 0) + color.hashCode() + brand.hashCode()) % 50;
         }
-        return hash;
-    }
-
-    private boolean equals(char[]string1, char[]string2){
-        if(string1.length!=string2.length){
-            return false;
-        }
-        for(int i=0; i<string1.length; i++){
-            if(string1[i]!=string2[i]){
-                return false;
-            }
-        }
-        return true;
+        return -1;
     }
 }

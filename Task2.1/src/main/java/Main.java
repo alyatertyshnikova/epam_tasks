@@ -2,10 +2,10 @@ package main.java;
 
 public class Main {
   public static void main(String[] args) {
-    Pen p = new Pen("blue", "pilot");
+    Pen p = new Pen(null, "pilot");
     Pen r = new Pen("red", "pilot");
-    Pen p1 = new Pen("blue", "pilot");
-    p1.canItWrite=false;
+    Pen p1 = new Pen(null, "pilot");
+  //  p1.setCanItWrite(false);
     System.out.println(p.toString());
     System.out.println(r.toString());
     System.out.println(p.equals(3));

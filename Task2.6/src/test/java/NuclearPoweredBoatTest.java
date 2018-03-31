@@ -21,7 +21,7 @@ public class NuclearPoweredBoatTest {
 
     @Test
     public void goToJourneyShouldReturnTrueForFoundDetailsThatEqualDetailsNeededForJourney(){
-        nuclearPoweredBoat.engine.setFoundetails(NuclearPoweredBoat.Engine.numberOfDetailsNeededForJourney);
+        nuclearPoweredBoat.repairDetails(NuclearPoweredBoat.numberOfDetailsNeededForJourney);
         assertTrue(nuclearPoweredBoat.goToJourney());
     }
 }

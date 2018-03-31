@@ -5,7 +5,6 @@ public class Main {
     Pen p = new Pen(null, "pilot");
     Pen r = new Pen("red", "pilot");
     Pen p1 = new Pen(null, "pilot");
-  //  p1.setCanItWrite(false);
     System.out.println(p.toString());
     System.out.println(r.toString());
     System.out.println(p.equals(3));

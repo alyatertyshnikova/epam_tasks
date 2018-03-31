@@ -2,22 +2,21 @@ package main.java;
 
 import main.java.audit.Employee;
 import main.java.audit.Stationery;
-import main.java.sort.StationerySort;
+import main.java.sort.GoodsSorting;
 
 public class Main {
     public static void main(String[] args) {
-        Employee e = new Employee("John", "Brion");
+        Employee employee = new Employee("John", "Brion");
         Stationery pen = new Stationery("Pilot", 1, "pen", 15);
-        e.addNewStationary(pen);
+        employee.addNewStationary(pen);
         Stationery othPen=new Stationery("Pilot", 30, "pen", 5);
-        e.deleteBoughtStationery(othPen);
-        e.deleteBoughtStationery(pen);
-        e.showGoods();
-        e.deleteBoughtStationery(pen);
-        StationerySort em=new StationerySort();
-        em.createBeginnerSet();
-        em.sortByPrice();
-        em.sortByBrand();
-        em.sortByPriceThenByBrand();
+        employee.deleteBoughtStationery(othPen);
+        employee.deleteBoughtStationery(pen);
+        employee.showGoods();
+        employee.deleteBoughtStationery(pen);
+        employee.createBeginnerSet();
+        GoodsSorting.sortByBrand(employee.getStationeries());
+        GoodsSorting.sortByPrice(employee.getStationeries());
+        GoodsSorting.sortByPriceThenByBrand(employee.getStationeries());
     }
 }

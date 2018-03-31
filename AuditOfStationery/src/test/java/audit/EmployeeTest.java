@@ -39,7 +39,7 @@ public class EmployeeTest {
 
     @Test
     public void deleteBoughtStationeryShouldReturnFalseForNonExistingGoods(){
-        Pen redPen=new Pen("RosPechat", 40, "pen",1, "red",
+        Pen redPen=new Pen("RosPechat", 40, "pen", 1,"red",
                 false);
         assertFalse(employee.deleteBoughtStationery(redPen));
     }

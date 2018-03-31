@@ -1,32 +1,33 @@
 package test.java.sort;
 
-import main.java.sort.StationerySort;
+import main.java.audit.Employee;
+import main.java.sort.GoodsSorting;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class StationerySortTest {
-    private StationerySort e;
+    private Employee employee;
     @Before
     public void setUp(){
-        e=new StationerySort();
-        e.createBeginnerSet();
+       employee=new Employee("John", "Brion");
+       employee.createBeginnerSet();
     }
 
     @Test
     public void sortByPriceShouldSortCollectionAndReturnTrue(){
-        assertTrue(e.sortByPrice());
+        assertTrue(GoodsSorting.sortByPrice(employee.getStationeries()));
     }
 
     @Test
     public void sortByBrandShouldSortCollectionAndReturnTrue(){
-        assertTrue(e.sortByBrand());
+        assertTrue(GoodsSorting.sortByBrand(employee.getStationeries()));
     }
 
     @Test
     public void sortByPriceThenByBrandShouldSortCollectionAndReturnTrue(){
-        assertTrue(e.sortByPriceThenByBrand());
+        assertTrue(GoodsSorting.sortByPriceThenByBrand(employee.getStationeries()));
     }
 
 }

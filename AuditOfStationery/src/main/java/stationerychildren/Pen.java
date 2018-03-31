@@ -4,21 +4,20 @@ import main.java.audit.Stationery;
 
 public class Pen extends Stationery {
     private String color;
-    private boolean isItBallPoint;
+    private boolean ballPoint;
 
     public Pen(String brand, int price, String typeOfStationery, int numberOfStationeryType, String color,
-               boolean isItBallPoint) {
+               boolean ballPoint) {
         super(brand, price, typeOfStationery, numberOfStationeryType);
         this.color=color;
-        this.isItBallPoint=isItBallPoint;
+        this.ballPoint=ballPoint;
     }
 
     public String getColor() {
         return color;
     }
 
-    public boolean isItBallPoint() {
-        return isItBallPoint;
+    public boolean isBallPoint() {
+        return ballPoint;
     }
-
 }

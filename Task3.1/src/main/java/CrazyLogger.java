@@ -2,12 +2,14 @@ package main.java;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CrazyLogger {
     private StringBuilder logs;
-    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY : hh-mm");
+    public final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY : hh-mm");
     final static Pattern pattern = Pattern.compile("(\\d{2}-){2}\\d{4} : \\d{2}-\\d{2} .[^;]+;");
 
     public CrazyLogger() {
@@ -19,7 +21,7 @@ public class CrazyLogger {
     }
 
     public boolean addNewLog(String message, Date date) {
-        if(message==null||date==null){
+        if (message == null || date == null) {
             return false;
         }
         if (message.contains(";")) {
@@ -30,25 +32,29 @@ public class CrazyLogger {
         return true;
     }
 
-    public boolean findLog(Date date) {
-        if(date==null){
-            return false;
+    public List<String> findLog(Date date) {
+        if (date == null) {
+            return null;
         }
         String dateString = dateFormat.format(date);
-        findLog(dateString);
-        return true;
+        return findLog(dateString);
     }
 
-    public boolean findLog(String message) {
-        if(message==null){
-            return false;
+    public List<String> findLog(String message) {
+        List<String> foundLogs = new LinkedList<>();
+        if (message == null) {
+            return null;
         }
         Matcher matcher = pattern.matcher(logs);
         while (matcher.find()) {
             if (matcher.group(0).contains(message)) {
                 System.out.println(matcher.group(0));
+                foundLogs.add(matcher.group(0));
             }
         }
-        return true;
+        if (foundLogs.isEmpty()) {
+            return null;
+        }
+        return foundLogs;
     }
 }

@@ -1,0 +1,11 @@
+boolean - 4
+class - 1
+if - 7
+instanceof - 1
+int - 1
+package - 1
+private - 3
+public - 9
+return - 13
+this - 4
+void - 1

@@ -2,7 +2,7 @@ package main.java;
 
 import java.io.*;
 
-public class ToSerialize {
+public class MoviesSerializer {
 
     public static boolean toSerialize(MovieCollection object, String fileName) {
         if (fileName == null) {

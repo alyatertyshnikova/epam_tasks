@@ -1,13 +1,13 @@
 package test.java;
 
 import main.java.MovieCollection;
-import main.java.ToSerialize;
+import main.java.MoviesSerializer;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ToSerializeTest {
+public class MoviesSerializerTest {
     private MovieCollection collection;
     private String fileName;
 
@@ -20,32 +20,32 @@ public class ToSerializeTest {
 
     @Test
     public void toSerializeShouldReturnFalseForNullFileName() {
-        assertFalse(ToSerialize.toSerialize(collection, null));
+        assertFalse(MoviesSerializer.toSerialize(collection, null));
     }
 
     @Test
     public void toSerializeShouldReturnFalseIfExceptionHappens() {
-        assertFalse(ToSerialize.toSerialize(collection, "/wrong/name"));
+        assertFalse(MoviesSerializer.toSerialize(collection, "/wrong/name"));
     }
 
     @Test
     public void toSerializeShouldReturnTrueAndSerializeObject() {
-        assertTrue(ToSerialize.toSerialize(collection, fileName));
+        assertTrue(MoviesSerializer.toSerialize(collection, fileName));
     }
 
     @Test
     public void toDeserializeShouldReturnNullForNullFileName() {
-        assertNull(ToSerialize.toDeserialize(null));
+        assertNull(MoviesSerializer.toDeserialize(null));
     }
 
     @Test
     public void toDeserializeShouldReturnFalseIfExceptionHappens() {
-        assertNull(ToSerialize.toDeserialize("/wrong/name"));
+        assertNull(MoviesSerializer.toDeserialize("/wrong/name"));
     }
 
     @Test
-    public void toDeserializeShouldReturnObjectFromFile(){
-        ToSerialize.toSerialize(collection, fileName);
-        assertEquals(collection, ToSerialize.toDeserialize(fileName));
+    public void toDeserializeShouldReturnObjectFromFile() {
+        MoviesSerializer.toSerialize(collection, fileName);
+        assertEquals(collection, MoviesSerializer.toDeserialize(fileName));
     }
 }

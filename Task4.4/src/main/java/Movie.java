@@ -27,8 +27,29 @@ public class Movie implements Serializable {
         this.myRate = myRate;
     }
 
-    public Map<String, Actor> getRoles() {
-        return roles;
+    public void showRoles() {
+        roles.forEach((role, actor) -> System.out.println(role + " - " + actor.toString()));
+    }
+
+    public boolean addRole(String role, Actor actor) {
+        if (actor == null || role == null) {
+            return false;
+        }
+        if (roles.containsKey(role)) {
+            return false;
+        }
+        roles.put(role, actor);
+        return true;
+    }
+
+    public boolean deleteRole(String role) {
+        if (role == null) {
+            return false;
+        }
+        if (roles.remove(role) == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -52,7 +73,7 @@ public class Movie implements Serializable {
             return false;
         }
 
-        if (!roles.equals(otherMovie.getRoles())) {
+        if (!roles.equals(otherMovie.roles)) {
             return false;
         }
         return true;

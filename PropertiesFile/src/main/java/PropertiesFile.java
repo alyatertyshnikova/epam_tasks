@@ -2,30 +2,24 @@ package main.java;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class PropertiesFile {
     private static PropertiesFile instance;
     private String fileName;
-    private Properties properties;
-    private Map<String, String> values;
     /*Если добавить в Map элемент с ключом, который уже присутствует, то она перезапишет значение,
       соответсвующее ключу на значение добавляемого элемента*/
+    private Map<String, String> values;
+    final static Pattern splitPattern = Pattern.compile("[\\t :=]+");
 
     private PropertiesFile(String fileName) throws PropertiesFileNotFoundException {
         this.fileName = fileName;
-        properties = new Properties();
         values = new HashMap<>();
-        try (FileInputStream input = new FileInputStream(fileName)) {
-            properties.load(input);
-            getValues();
-        } catch (FileNotFoundException exception) {
-            if (fileName.contains(".properties")) {
-                throw new PropertiesFileNotFoundException(".properties not found", fileName);
-            }
-            System.out.println(exception);
-        } catch (IOException exception) {
-            System.out.println(exception);
-        }
+        load(fileName);
+    }
+
+    public void showPropertiesData() {
+        values.forEach((key, value) -> System.out.format("%s - %s\n", key, value));
     }
 
     public static PropertiesFile getInstance(String fileName) throws PropertiesFileNotFoundException {
@@ -35,14 +29,21 @@ public class PropertiesFile {
         return instance;
     }
 
-    private void getValues() {
-        String key;
-        Set<String> keys = properties.stringPropertyNames();
-        Iterator<String> iterator = keys.iterator();
-        do {
-            key = iterator.next();
-            values.put(key, properties.getProperty(key));
-        } while (iterator.hasNext());
+    private void load(String fileName) throws PropertiesFileNotFoundException {
+        String line;
+        String[] entrySet;
+        if (!fileName.contains(".properties")) {
+            throw new PropertiesFileNotFoundException(".properties not found", fileName);
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            while ((line = reader.readLine()) != null) {
+                entrySet = splitPattern.split(line.trim(), 2);
+                values.put(entrySet[0], entrySet[1]);
+            }
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
+
     }
 
     public String getValue(String key) throws KeyNotFoundException {

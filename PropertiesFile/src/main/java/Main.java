@@ -7,12 +7,13 @@ public class Main {
         PropertiesFile file=null;
         try {
             file = PropertiesFile.getInstance(fileName);
+            file.showPropertiesData();
         }catch (PropertiesFileNotFoundException exception){
             exception.printStackTrace();
             return;
         }
         try {
-            String value = file.getValue(null);
+            String value = file.getValue("X");
         }catch (KeyNotFoundException exception){
            exception.printStackTrace();
            return;

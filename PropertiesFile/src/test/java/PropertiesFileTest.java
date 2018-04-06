@@ -6,7 +6,7 @@ import main.java.PropertiesFileNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -27,9 +27,20 @@ public class PropertiesFileTest {
     @Test
     public void getValueShouldReturnValueRelatedToKey() {
         try {
-            assertEquals("1234", file.getValue("alina"));
+            assertEquals("1", file.getValue("X"));
         } catch (KeyNotFoundException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getInstanceShouldReturnObjectCreatedAtFirstTime() {
+        String anotherFileName = "/Users/macintosh/IdeaProjects/PropertiesFile/src/another.properties";
+        try {
+            PropertiesFile anotherFile = PropertiesFile.getInstance(anotherFileName);
+            assertEquals(file, anotherFile);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
     }
 }

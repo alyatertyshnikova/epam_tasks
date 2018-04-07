@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 public class PropertiesFileNotFoundException extends FileNotFoundException {
     private String propertiesFileName;
 
-    public PropertiesFileNotFoundException(String errorString, String propertiesFileName){
+    public PropertiesFileNotFoundException(String errorString, String propertiesFileName) {
         super(errorString);
-        this.propertiesFileName=propertiesFileName;
+        this.propertiesFileName = propertiesFileName;
     }
 
     @Override

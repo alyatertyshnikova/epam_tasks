@@ -1,5 +1,5 @@
 package main.java;
-public class KeyNotFoundException extends Throwable{
+public class KeyNotFoundException extends Exception{
     private String key;
 
     public KeyNotFoundException(String errorString, String key){

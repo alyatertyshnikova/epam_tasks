@@ -32,26 +32,23 @@ public class PropertiesFile {
     private void load(String fileName) throws PropertiesFileNotFoundException {
         String line;
         String[] entrySet;
-        if (!fileName.contains(".properties")) {
-            throw new PropertiesFileNotFoundException(".properties not found", fileName);
-        }
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             while ((line = reader.readLine()) != null) {
                 entrySet = splitPattern.split(line.trim(), 2);
                 values.put(entrySet[0], entrySet[1]);
             }
+        } catch (FileNotFoundException exception) {
+            throw new PropertiesFileNotFoundException("Properties file is not found", fileName);
         } catch (IOException exception) {
             System.out.println(exception);
         }
-
     }
-
     public String getValue(String key) throws KeyNotFoundException {
         String value;
-        if ((value = values.get(key)) == null) {
+        if (!values.containsKey(key)) {
             throw new KeyNotFoundException("Key is not found", key);
         }
-        return value;
+        return values.get(key);
     }
 
     public String getFileName() {

@@ -14,7 +14,6 @@ public class Main {
         }
         try {
             String value = file.getValue("X");
-            int a=5;
         }catch (KeyNotFoundException exception){
            exception.printStackTrace();
            return;
